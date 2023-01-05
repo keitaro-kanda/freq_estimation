@@ -14,7 +14,7 @@ RCS = 1.0
 P_t = 800 #[W]
 P_min = 1e-12 #[W]
 G_t = 1.64
-f = np.arange(1, 600, 1)
+f = np.arange(1, 1000, 1)
 #光速
 c = 299792458 #[m/s]
 #波長
@@ -84,8 +84,8 @@ P_f5 = P_t*G_t**2*(wavelength)**2/(4*np.pi)**3/R7**4 * RCS ** through**4 *reflec
 
 
 plt.figure(figsize=(16, 8))
-
-plt.subplot(1, 2, 1, title='roof')
+#天井のプロット
+plt.subplot(1, 2, 1, title='echo from tube roof')
 plt.plot(f, P_r1, label='depth='+str(R1)+'[m]')
 plt.plot(f, P_r2, label='depth='+str(R2)+'[m]')
 plt.plot(f, P_r3, label='depth='+str(R3)+'[m]')
@@ -93,14 +93,16 @@ plt.plot(f, P_r4, label='depth='+str(R4)+'[m]')
 plt.plot(f, P_r5, label='depth='+str(R5)+'[m]')
 plt.plot(f, noise, label='noise level')
 #グラフの体裁
+plt.xlim(0, 600)
 plt.ylim(10**(-13), 1)
 plt.yscale('log')
-plt.xlabel('frequency[MHz]')
-plt.ylabel('recieved power[W]')
+plt.xlabel('frequency [MHz]', fontsize=15)
+plt.ylabel('recieved power [W]', fontsize=15)
 plt.legend(fontsize = 12)
 plt.grid()
 
-plt.subplot(1, 2, 2, title='floor')
+#床のプロット
+plt.subplot(1, 2, 2, title='echo from tube floor')
 plt.plot(f, P_f1, label='depth='+str(R3)+'[m]')
 plt.plot(f, P_f2, label='depth='+str(R4)+'[m]')
 plt.plot(f, P_f3, label='depth='+str(R5)+'[m]')
@@ -108,10 +110,11 @@ plt.plot(f, P_f4, label='depth='+str(R6)+'[m]')
 plt.plot(f, P_f5, label='depth='+str(R7)+'[m]')
 plt.plot(f, noise, label='noise level')
 #グラフの体裁
+plt.xlim(0, 150)
 plt.ylim(10**(-13), 1)
 plt.yscale('log')
-plt.xlabel('frequency[MHz]')
-plt.ylabel('recieved power[W]')
+plt.xlabel('frequency [MHz]', fontsize=15)
+plt.ylabel('recieved power [W]', fontsize=15)
 plt.legend(fontsize = 12)
 plt.grid()
 
