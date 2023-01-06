@@ -1,10 +1,5 @@
-import wave
-from cProfile import label
-from turtle import title
-
 import matplotlib.pyplot as plt
 import numpy as np
-from cv2 import GEMM_2_T
 
 #地表面パラメータ
 epsilon_1 = 4.0
