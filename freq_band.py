@@ -6,7 +6,7 @@ c = 299792458 #[m/s]
 delta_R_roof = 1.0
 epsilon_roof = 4
 #床
-delta_R_floor = 0.8
+delta_R_floor = 1.0
 epsilon_floor = 1
 
 #計算
