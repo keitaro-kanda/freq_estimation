@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.colors import Normalize
 
 #地表面パラメータ
 epsilon_1 = 4.0
@@ -16,23 +17,51 @@ f2 = 30
 f3 = 50
 f4 = 100
 
-f = np.arange(1, 100, 1)
-
 #光速
 c = 299792458 #[m/s]
 #探査深度
-R = np.arange(1, 50, 0.1)
+R = np.arange(1, 100, 0.1)
 
 
 #反射係数・透過係数
 reflection = (np.sqrt(epsilon_1) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_1) + np.sqrt(epsilon_0))**2
 through = 1-reflection
 
-#ノイズレベル
-noise = 1e-12 + R*0
+
+#--------
+
+def freq_depth_power():
+    #meshの作成
+    freq = np.arange(1, 101, 1)
+    depth = np.arange(1, 51, 1)
+    f, d = np.meshgrid(freq, depth)
+    #ノイズレベル
+    noise = 1e-12 #[W]
+    #減衰率
+    attenuation = 10**(-0.091*np.sqrt(epsilon_1)*losstangent*f*d/5)
+    #床
+    power = P_t*G_t**2*(c/f*10**6)**2/(4*np.pi)**3/d**4 * RCS ** through**4 *reflection * attenuation**(2*d)
+    power_dB = 10*np.log10(power/noise)
+    
+    #描画
+    plt.pcolormesh(f, d, power_dB, cmap='coolwarm', norm=Normalize(vmin=-300, vmax=300))
+    #カラーバー
+    pp = plt.colorbar(orientation='vertical')
+    pp.set_label('Power [dB]')
+    #グラフの体裁
+    plt.title('Echo from Tube Floor', fontsize=15)
+    plt.xlabel('Frequency [MHz]')
+    plt.ylabel('Detecsion Depth [m]')
+    plt.show()
+
+
+freq_depth_power()
 
 
 def depth_power():
+    #ノイズレベル
+    noise = 1e-12 + R*0
+
     #減衰率
     attenuation_1 = 10**(-0.091*np.sqrt(epsilon_1)*losstangent*f1*R/5)
     attenuation_2 = 10**(-0.091*np.sqrt(epsilon_1)*losstangent*f2*R/5)
@@ -41,18 +70,18 @@ def depth_power():
 
     #----天井----
     #反射
-    P_r1 = P_t*G_t**2*(c/f1)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_1**(2*R)
-    P_r2 = P_t*G_t**2*(c/f2)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_2**(2*R)
-    P_r3 = P_t*G_t**2*(c/f3)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_3**(2*R)
-    P_r4 = P_t*G_t**2*(c/f4)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_3**(2*R)
+    P_r1 = P_t*G_t**2*(c/f1*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_1**(2*R)
+    P_r2 = P_t*G_t**2*(c/f2*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_2**(2*R)
+    P_r3 = P_t*G_t**2*(c/f3*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_3**(2*R)
+    P_r4 = P_t*G_t**2*(c/f4*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**2 *reflection * attenuation_3**(2*R)
 
 
     #----床----
     #反射
-    P_f1 = P_t*G_t**2*(c/f1)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_1**(2*R)
-    P_f2 = P_t*G_t**2*(c/f2)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_2**(2*R)
-    P_f3 = P_t*G_t**2*(c/f3)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_3**(2*R)
-    P_f4 = P_t*G_t**2*(c/f4)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_4**(2*R)
+    P_f1 = P_t*G_t**2*(c/f1*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_1**(2*R)
+    P_f2 = P_t*G_t**2*(c/f2*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_2**(2*R)
+    P_f3 = P_t*G_t**2*(c/f3*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_3**(2*R)
+    P_f4 = P_t*G_t**2*(c/f4*10**6)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_4**(2*R)
 
 
     plt.figure(figsize=(14, 7))
@@ -89,4 +118,4 @@ def depth_power():
 
     plt.show()
 
-depth_power()
+#depth_power()
