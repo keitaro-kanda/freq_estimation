@@ -52,6 +52,7 @@ def freq_depth_power():
     plt.title('Echo from Tube Floor', fontsize=20)
     plt.xlabel('Frequency [MHz]', fontsize=15)
     plt.ylabel('Detecsion Depth [m]', fontsize=15)
+    plt.savefig('fig/Echo_from_Tube_Floor.png')
     plt.show()
 
 
