@@ -39,19 +39,19 @@ def freq_depth_power():
     noise = 1e-12 #[W]
     #減衰率
     attenuation = 10**(-0.091*np.sqrt(epsilon_1)*losstangent*f*d/5)
-    #床
+    #パワーの計算
     power = P_t*G_t**2*(c/f*10**6)**2/(4*np.pi)**3/d**4 * RCS ** through**4 *reflection * attenuation**(2*d)
     power_dB = 10*np.log10(power/noise)
-    
     #描画
-    plt.pcolormesh(f, d, power_dB, cmap='coolwarm', norm=Normalize(vmin=-300, vmax=300))
+    plt.pcolormesh(f, d, power_dB, cmap='coolwarm', norm=Normalize(vmin=-100, vmax=100))
     #カラーバー
     pp = plt.colorbar(orientation='vertical')
-    pp.set_label('Power [dB]')
+    pp.set_label('Echo Power to Noise Level [dB]', fontsize=15)
     #グラフの体裁
-    plt.title('Echo from Tube Floor', fontsize=15)
-    plt.xlabel('Frequency [MHz]')
-    plt.ylabel('Detecsion Depth [m]')
+    plt.grid(linestyle='--', color='grey')
+    plt.title('Echo from Tube Floor', fontsize=20)
+    plt.xlabel('Frequency [MHz]', fontsize=15)
+    plt.ylabel('Detecsion Depth [m]', fontsize=15)
     plt.show()
 
 
