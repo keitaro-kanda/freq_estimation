@@ -19,7 +19,7 @@ f4 = 100
 #光速
 c = 299792458 #[m/s]
 #探査深度
-R = np.arange(1, 100, 1)
+R = np.arange(1, 50, 0.1)
 
 
 #反射係数・透過係数
@@ -51,7 +51,7 @@ P_f3 = P_t*G_t**2*(c/f3)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * 
 P_f4 = P_t*G_t**2*(c/f4)**2/(4*np.pi)**3/R**4 * RCS ** through**4 *reflection * attenuation_4**(2*R)
 
 
-plt.figure(figsize=(16, 8))
+plt.figure(figsize=(14, 7))
 #天井のプロット
 plt.subplot(1, 2, 1, title='echo from tube roof')
 plt.plot(R, P_r1, label='freq='+str(f1)+'[MHz]')
