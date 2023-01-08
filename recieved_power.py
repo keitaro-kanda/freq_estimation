@@ -6,7 +6,7 @@ from matplotlib.colors import Normalize
 epsilon_1 = 4.0
 epsilon_0 = 1
 losstangent = 0.01
-RCS = 1.0
+RCS = 30.0
 #レーダーパラメータ
 P_t = 800 #[W]
 P_min = 1e-12 #[W]
