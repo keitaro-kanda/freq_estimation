@@ -18,8 +18,8 @@ dR_vacuum = c/(2*np.sqrt(epsilon0)*df*10**6)
 
 #描画
 plt.figure(figsize=(8, 8))
-plt.plot(df, dR_basalt, label='in basalt')
-plt.plot(df, dR_vacuum, label='in vacuum')
+#plt.plot(df, dR_basalt, label='in basalt')
+plt.plot(df, dR_vacuum)
 
 #グラフの体裁
 plt.title('depth resolution', fontsize='20')

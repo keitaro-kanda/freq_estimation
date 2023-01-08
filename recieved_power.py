@@ -26,6 +26,8 @@ R = np.arange(1, 100, 0.1)
 #反射係数・透過係数
 reflection = (np.sqrt(epsilon_1) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_1) + np.sqrt(epsilon_0))**2
 through = 1-reflection
+print('反射係数', reflection)
+print('投下係数', through)
 
 
 #--------
@@ -42,6 +44,7 @@ def freq_depth_power():
     #パワーの計算
     power = P_t*G_t**2*(c/f*10**6)**2/(4*np.pi)**3/d**4 * RCS ** through**4 *reflection * attenuation**(2*d)
     power_dB = 10*np.log10(power/noise)
+
     #描画
     plt.pcolormesh(f, d, power_dB, cmap='coolwarm', norm=Normalize(vmin=-100, vmax=100))
     #カラーバー
