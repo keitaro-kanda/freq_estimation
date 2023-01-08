@@ -6,7 +6,7 @@ from matplotlib.colors import Normalize
 epsilon_1 = 4.0
 epsilon_0 = 1
 losstangent = 0.01
-RCS = 30.0
+radarcrosssection = 30.0
 #レーダーパラメータ
 P_t = 800 #[W]
 P_min = 1e-12 #[W]
@@ -34,15 +34,15 @@ print('投下係数', through)
 
 def freq_depth_power():
     #meshの作成
-    freq = np.arange(1, 101, 1)
-    depth = np.arange(1, 51, 1)
+    freq = np.arange(1, 101, 0.5)
+    depth = np.arange(1, 51, 0.5)
     f, d = np.meshgrid(freq, depth)
     #ノイズレベル
     noise = 1e-12 #[W]
     #減衰率
     attenuation = 10**(-0.091*np.sqrt(epsilon_1)*losstangent*f*d/5)
     #パワーの計算
-    power = P_t*G_t**2*(c/f*10**6)**2/(4*np.pi)**3/d**4 * RCS ** through**4 *reflection * attenuation**(2*d)
+    power = P_t*G_t**2*(c/f*10**6)**2/(4*np.pi)**3/d**4 * radarcrosssection ** through**4 *reflection * attenuation**(2*d)
     power_dB = 10*np.log10(power/noise)
 
     #描画
