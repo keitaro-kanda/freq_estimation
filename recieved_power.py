@@ -34,7 +34,7 @@ print('投下係数', through)
 
 def freq_depth_power():
     #meshの作成
-    freq = np.arange(1, 101, 0.5)
+    freq = np.arange(1, 201, 0.5)
     depth = np.arange(1, 51, 0.5)
     f, d = np.meshgrid(freq, depth)
     #ノイズレベル
