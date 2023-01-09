@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib.colors import Normalize
 
 #地表面パラメータ
-epsilon_1 = 4.0
+epsilon_1 = 5.7
 epsilon_0 = 1
 losstangent = 0.01
 radarcrosssection = 30.0
