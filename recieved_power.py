@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib.colors import Normalize
 
 #地表面パラメータ
-epsilon_1 = 5.7
+epsilon_1 = 7.1
 epsilon_0 = 1
 losstangent = 0.01
 radarcrosssection = 30.0
@@ -55,7 +55,7 @@ def freq_depth_power():
     plt.title('Echo from Tube Floor', fontsize=20)
     plt.xlabel('Frequency [MHz]', fontsize=15)
     plt.ylabel('Detecsion Depth [m]', fontsize=15)
-    plt.savefig('fig/Echo_from_Tube_Floor.png')
+    plt.savefig('fig/epsilon='+str(epsilon_1)+'.png')
     plt.show()
 
 
